@@ -42,10 +42,16 @@ class NiceSelector {
   }
 
   startTimer () {
-    this.timer = setInterval(() => this.time ++, 200)
+    this.timer = setInterval(() => {
+      if (this.time > 1) {
+        this.element.querySelector('.ns-interface').classList.add('ns-long-press')
+      }
+      this.time ++
+    }, 120)
   }
 
   endTimer () {
+    this.element.querySelector('.ns-interface').classList.remove('ns-long-press')
     clearInterval(this.timer)
     this.time = 0
   }
@@ -63,6 +69,7 @@ class NiceSelector {
     } else if (direction === 'up') {
       this.index += increment
     }
+
     this.index = this.index < 0
       ? this.index + this.listLength
       : this.index >= this.listLength
@@ -79,17 +86,14 @@ class NiceSelector {
 
   renderSelector () {
     this.element.innerHTML = `
-      <div id="${this.id}">
-        <div class="ns-interface">
-          ${this.text ? `<span class="ns-display-text">${this.text}</span>` : '' }
-          <span>Text</span>
-          <div class="ns-display" style="top: ${this.topPos}px; ${this.text ? 'padding-top:5px' : ''};">
-            ${this.items.map(item => `<div>${item}</div>` ).join('')}
-          </div>
-          <input type="hidden" name="${this.id}" value="${this.value}"/>
-          <div class="ns-btn ns-btn-top" data-btn="up">▲</div>
-          <div class="ns-btn ns-btn-bottom" data-btn="down">▲</div>
+      <div class="ns-interface">
+        ${this.text ? `<span class="ns-display-text">${this.text}</span>` : '' }
+        <div class="ns-display" style="top:${this.topPos}px;${this.text ? 'padding-top:5px' : ''};">
+          ${this.items.map(item => `<div>${item}</div>` ).join('')}
         </div>
+        <input type="hidden" name="${this.id}" value="${this.value}"/>
+        <div class="ns-btn ns-btn-top" data-btn="up">▲</div>
+        <div class="ns-btn ns-btn-bottom" data-btn="down">▲</div>
       </div>
     `
   }

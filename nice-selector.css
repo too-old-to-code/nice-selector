@@ -17,6 +17,10 @@
       background-image: linear-gradient(to bottom right, rgba(0,60,60,.5) 40%, rgba(0,50,50,.2));
     }
 
+    .ns-interface.ns-long-press {
+      background: transparent;
+    }
+
     .ns-display {
       position: absolute;
       z-index: -1;
@@ -31,6 +35,7 @@
       font-family: cursive;
       font-size: 1.6em;
       color: #841e1e;
+      color: #0820a7;
     }
 
     .ns-btn {
