@@ -1,0 +1,54 @@
+.ns-display-text {
+      position: absolute;
+      top:23px;
+      width: 100%;
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 10px;
+      color: #e2e186;
+    }
+
+    .ns-interface {
+      margin: 0 5px;
+      position: relative;
+      width: 60px;
+      height: 100px;
+      overflow: hidden;
+      background-image: linear-gradient(to bottom right, rgba(0,60,60,.5) 40%, rgba(0,50,50,.2));
+    }
+
+    .ns-display {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      transition: top .3s;
+    }
+
+    .ns-display > div {
+      text-align: center;
+      height: 60px;
+      line-height: 60px;
+      font-family: cursive;
+      font-size: 1.6em;
+      color: #841e1e;
+    }
+
+    .ns-btn {
+      position: absolute;
+      left:0;
+      right: 0;
+      text-align: center;
+      height: 20px;
+      line-height: 20px;
+      background-color: white;
+      user-select: none;
+    }
+
+    .ns-btn-bottom {
+      bottom: 0;
+      transform: rotate(180deg);
+    }
+
+    .ns-btn-top {
+      top: 0;
+    }
