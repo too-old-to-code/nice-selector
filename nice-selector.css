@@ -15,7 +15,7 @@
       width: 60px;
       height: 100px;
       overflow: hidden;
-      background-image: linear-gradient(to bottom right, rgba(0,60,60,.5) 40%, rgba(0,50,50,.2));
+      background-image: linear-gradient(to bottom right, rgba(27, 31, 31, 0.85) 40%, rgba(35, 107, 107, 0.6));
     }
 
     .ns-interface.ns-long-press {
@@ -24,7 +24,7 @@
 
     .ns-display {
       position: absolute;
-      z-index: -1;
+      z-index: 0;
       width: 100%;
       transition: top .3s;
     }
@@ -33,11 +33,11 @@
       text-align: center;
       height: 60px;
       line-height: 60px;
-      font-family: 'Cabin Sketch', cursive;
+      font-family: 'Cabin Sketch', sans-serif;
       font-size: 1.6em;
-      color: #841e1e;
-      color: #0820a7;
+      color: #9dd27f;
       user-select: none;
+      z-index:1;
     }
 
     .ns-btn {
