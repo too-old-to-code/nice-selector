@@ -6,6 +6,7 @@
       font-family: sans-serif;
       font-size: 10px;
       color: #e2e186;
+      user-select: none;
     }
 
     .ns-interface {
@@ -32,10 +33,11 @@
       text-align: center;
       height: 60px;
       line-height: 60px;
-      font-family: cursive;
+      font-family: 'Cabin Sketch', cursive;
       font-size: 1.6em;
       color: #841e1e;
       color: #0820a7;
+      user-select: none;
     }
 
     .ns-btn {
