@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+  <link rel="stylesheet" href="nice-selector.css">
+  <link rel="stylesheet" href="custom.css">
   <title>Document</title>
   <style>
 
@@ -13,7 +15,6 @@
     }
 
   </style>
-  <link rel="stylesheet" href="nice-selector.css">
 </head>
 <body>
   <form name="time" onsubmit="dostuff(event)">
@@ -21,10 +22,9 @@
       <div id="start-hour"></div>
       <div id="start-minute"></div>
       <div id="start-second"></div>
-      <div id="penguins"></div>
+      <div id="months"></div>
+      <div id="years"></div>
     </div>
-
-    <button type='submit'>click</button>
   </form>
 
 
@@ -33,6 +33,10 @@
     let startHour = new NiceSelector('start-hour', '00-24', 'HOURS')
     let startMinute = new NiceSelector('start-minute', '00-60', 'MINS')
     let startSecond = new NiceSelector('start-second', '00-60', 'SECS')
+    let months = new NiceSelector('months', [
+      'January','February','March','April','May','June','July','August','September','October','November','December'
+    ])
+    let years = new NiceSelector('years', '1998-2010')
 
     let dostuff = (e) => {
       e.preventDefault()
