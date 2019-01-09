@@ -27,20 +27,18 @@
     </div>
   </form>
 
-
   <script src="nice-selector.js"></script>
   <script>
-    let startHour = new NiceSelector('start-hour', '00-24', 'HOURS')
-    let startMinute = new NiceSelector('start-minute', '00-60', 'MINS')
-    let startSecond = new NiceSelector('start-second', '00-60', 'SECS')
+    let startHour = new NiceSelector('start-hour', '00-24', { title:'HOURS' })
+    let startMinute = new NiceSelector('start-minute', '00-60', { title: 'MINS' })
+    let startSecond = new NiceSelector('start-second', '00-60', { title: 'SECS' })
     let months = new NiceSelector('months', [
       'January','February','March','April','May','June','July','August','September','October','November','December'
     ])
     let years = new NiceSelector('years', '1998-2010')
 
     let dostuff = (e) => {
-      e.preventDefault()
-      console.log('e:', startSecond.value)
+      e ? years.slideUp(1) : years.slideDown(1)
     }
 
 

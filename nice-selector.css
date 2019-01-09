@@ -26,10 +26,10 @@
       position: absolute;
       z-index: 0;
       width: 100%;
-      transition: top .3s;
+      transition: top .3s cubic-bezier(0.215, 1.560, 1.000, 0.870);
     }
 
-    .ns-display > div {
+    .ns-display-item{
       text-align: center;
       height: 60px;
       line-height: 60px;

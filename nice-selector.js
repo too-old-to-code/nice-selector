@@ -1,8 +1,9 @@
 class NiceSelector {
-  constructor(id, items, text) {
+  constructor(id, items, options = {}) {
     this.id = id
     this.items = items
-    this.text = text
+    this.text = options.title
+    this.hideButtons = options.hideButtons
 
     // if it's not an array of values, we can take a number as a string
     // in the format 0-12. If we want to keep the leading zero on numbers
@@ -13,12 +14,17 @@ class NiceSelector {
 
     this.element = document.getElementById(id)
     this.listLength = this.items.length
-    this.topPos = 20
+    this.topPos = 0
+    this.topShift = this.hideButtons ? 0 : 20
     this.time = 0
     this.index = 0
     this.value = this.items[0]
+
     this.element.onmousedown = this.handleMousedown.bind(this)
     this.element.onmouseup = this.handleMouseup.bind(this)
+    this.element.onmouseleave = this.handleMouseLeave.bind(this)
+    this.slideDown = this.slideDown.bind(this)
+    this.slideUp = this.slideUp.bind(this)
 
     this.renderSelector()
   }
@@ -60,40 +66,52 @@ class NiceSelector {
     this.startTimer()
   }
 
+  handleMouseLeave(){
+    this.endTimer()
+  }
+
+  slideDown (num) {
+    this.index -= num
+    this.index = this.index < 0 ? this.index + this.listLength : this.index
+    this.slide()
+  }
+
+  slideUp (num) {
+    this.index += num
+    this.index = this.index >= this.listLength ? this.index - this.listLength : this.index
+    this.slide()
+  }
+
+  slide () {
+    this.topPos = this.index * 60
+    this.value = this.items[this.index]
+    this.element.querySelectorAll('.ns-display')[0].style.top = `${-this.topPos + this.topShift}px`
+    this.element.getElementsByTagName('input')[0].value = this.value
+  }
+
   handleMouseup (e) {
     let increment = this.time > 1 && this.listLength > 10 ? 10 : 1
     let direction = e.target.dataset.btn
 
     if (direction === 'down'){
-      this.index -= increment
+      this.slideDown(increment)
     } else if (direction === 'up') {
-      this.index += increment
+      this.slideUp(increment)
     }
 
-    this.index = this.index < 0
-      ? this.index + this.listLength
-      : this.index >= this.listLength
-        ? this.index - this.listLength
-        : this.index
-
     this.endTimer()
-
-    this.topPos = this.index * 60
-    this.value = this.items[this.index]
-    this.element.querySelectorAll('.ns-display')[0].style.top = `${-this.topPos + 20}px`
-    this.element.getElementsByTagName('input')[0].value = this.value
   }
 
   renderSelector () {
     this.element.innerHTML = `
-      <div class="ns-interface">
-        ${this.text ? `<span class="ns-display-text">${this.text}</span>` : '' }
-        <div class="ns-display" style="top:${this.topPos}px;${this.text ? 'padding-top:5px' : ''};">
-          ${this.items.map(item => `<div>${item}</div>` ).join('')}
+      <div class="ns-interface" style="height:${this.hideButtons ? '60px' : '100px'}">
+        ${this.text ? `<span class="ns-display-text" style="top:${this.hideButtons ? '3px': '23px'}">${this.text}</span>` : '' }
+        <div class="ns-display" style="top:${this.topShift}px;${this.text ? 'padding-top:5px' : ''};">
+          ${this.items.map(item => `<div class="ns-display-item">${item}</div>` ).join('')}
         </div>
         <input type="hidden" name="${this.id}" value="${this.value}"/>
-        <div class="ns-btn ns-btn-top" data-btn="up">▲</div>
-        <div class="ns-btn ns-btn-bottom" data-btn="down">▲</div>
+        ${ this.hideButtons ? '' : `<div class="ns-btn ns-btn-top" data-btn="up">▲</div>`}
+        ${ this.hideButtons ? '' : `<div class="ns-btn ns-btn-bottom" data-btn="down">▲</div>`}
       </div>
     `
   }
